@@ -6,16 +6,18 @@
     android:gravity="center"
     android:background="#345" >
 
-    <TextView android:layout_width="fill_parent"
+    <TextView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Text To Speech"
         android:padding="15dip"
-        android:textColor="#0587d9"
+        android:textColor="#45e8d2"
         android:textSize="26dip"
         android:gravity="center"
         android:textStyle="bold"/>
 
-    <EditText android:id="@+id/txtText"
+    <AutoCompleteTextView
+        android:id="@+id/txtText"
         android:textColor="#fff"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -28,4 +30,13 @@
         android:layout_height="wrap_content"
         android:text="Speak Out"
         android:layout_margin="10dip"/>
+
+    <TextView
+        android:id="@+id/heading"
+        android:layout_marginTop="10dp"
+        android:textSize="20dp"
+        android:textColor="#fff"
+        android:text="Clear History"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>
