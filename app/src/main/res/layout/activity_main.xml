@@ -3,40 +3,43 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:background="#345" >
+    android:background="#ffe0b2">
+
+    <include layout="@layout/toolbar"/>
 
     <TextView
+        android:layout_marginTop="30dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Text To Speech"
         android:padding="15dip"
-        android:textColor="#45e8d2"
+        android:textColor="#0f1463"
         android:textSize="26dip"
         android:gravity="center"
         android:textStyle="bold"/>
+    <android.support.design.widget.TextInputLayout
+        android:layout_margin="16dp"
+        android:layout_marginTop="5dp"
+        android:ems="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
     <AutoCompleteTextView
         android:id="@+id/txtText"
-        android:textColor="#fff"
-        android:layout_width="fill_parent"
+        android:textColor="#000"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter some text to speak"
-        android:layout_marginTop="20dip"
-        android:layout_margin="10dip"/>
+        android:hint="Enter some text to speak"/>
 
-    <Button android:id="@+id/btnSpeak"
-        android:layout_width="fill_parent"
+</android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:background="#ffca28"
+        android:layout_gravity="center"
+        android:id="@+id/btnSpeak"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:text="Speak Out"
         android:layout_margin="10dip"/>
-
-    <TextView
-        android:id="@+id/heading"
-        android:layout_marginTop="10dp"
-        android:textSize="20dp"
-        android:textColor="#fff"
-        android:text="Clear History"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    
 </LinearLayout>
