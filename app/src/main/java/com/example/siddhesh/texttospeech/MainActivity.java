@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         toolbar = (Toolbar)findViewById(R.id.tool);
         his = (ImageView)findViewById(R.id.history_icon);
         menus = (ImageView)findViewById(R.id.menuic);
-        //setSupportActionBar(toolbar);
+
         tts = new TextToSpeech(this, this);
         btnSpeak = (Button)findViewById(R.id.btnSpeak);
         txtText = (AutoCompleteTextView) findViewById(R.id.txtText);
