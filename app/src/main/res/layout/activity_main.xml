@@ -17,6 +17,7 @@
         android:textSize="26dip"
         android:gravity="center"
         android:textStyle="bold"/>
+
     <android.support.design.widget.TextInputLayout
         android:layout_margin="16dp"
         android:layout_marginTop="5dp"
@@ -28,7 +29,7 @@
         android:id="@+id/txtText"
         android:textColor="#000"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:hint="Enter some text to speak"/>
 
 </android.support.design.widget.TextInputLayout>

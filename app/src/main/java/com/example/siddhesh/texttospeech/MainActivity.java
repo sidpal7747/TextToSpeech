@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
                             setCustomAdapter();
                             return true;
                         } else {
+                            android.os.Process.killProcess(android.os.Process.myPid());
                             System.exit(1);
                         }
                         return false;
@@ -146,13 +147,30 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         }
     }
     public void insert() {
-
-        if(!isPresent(txtText.getText().toString())){
+        String string = txtText.getText().toString();
+        if(string.endsWith(" ")){
+            char[] chars = string.toCharArray();
+            int j=chars.length-1;
+            for(int i=j;i>=0;i--){
+                if(chars[i]==' '){
+                    j--;
+                } else {
+                    break;
+                }
+            }   string="";
+            for (int k=0;k<=j;k++) {
+                string += chars[k];
+            }
+        }
+        if(string.equals("")){
+            return;
+        }
+        if(!isPresent(string)){
         try {
             long id = -1;
             sqLiteDatabase = dBhelper.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
-                contentValues.put("Usertext", txtText.getText().toString());
+                contentValues.put("Usertext", string);
                 id = sqLiteDatabase.insert("HISTORY", null, contentValues);
             if (id < 0) {
                 Toast.makeText(this, "Failed to add Record.", Toast.LENGTH_LONG).show();
