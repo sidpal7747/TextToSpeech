@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffe0b2">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tool"
+        android:layout_marginLeft="-16dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#ffca28"
+        app:logo="@mipmap/tts"
+        app:title="Text To Speech"
+        app:titleTextColor="#000"
+        app:titleTextAppearance="?android:attr/textAppearanceMedium"
+        android:padding="5dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+        </android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:id="@+id/touchArea"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:textSize="24dp"
+        android:id="@+id/textInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dummy Text"
+        android:textColor="#000"
+        />
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<TextView-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:paddingRight="16dp"-->
+            <!--android:gravity="end"-->
+            <!--android:id="@+id/datetime"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Dummy Text"/>-->
+    <!--</LinearLayout>-->
+        </LinearLayout>
+</LinearLayout>

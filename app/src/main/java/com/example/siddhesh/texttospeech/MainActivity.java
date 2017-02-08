@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements TextToSpeech.OnInitListener{
@@ -167,10 +168,12 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         }
         if(!isPresent(string)){
         try {
+            Date date = new Date(System.currentTimeMillis());
             long id = -1;
             sqLiteDatabase = dBhelper.getWritableDatabase();
             ContentValues contentValues = new ContentValues();
                 contentValues.put("Usertext", string);
+                contentValues.put("Datetime",date.toString().substring(0,20));
                 id = sqLiteDatabase.insert("HISTORY", null, contentValues);
             if (id < 0) {
                 Toast.makeText(this, "Failed to add Record.", Toast.LENGTH_LONG).show();

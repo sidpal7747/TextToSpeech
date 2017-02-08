@@ -12,8 +12,8 @@ import android.widget.Toast;
 public class DBhelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "sample";
     private static final String TABLE_NAME = "HISTORY";
-    private static final int DATABASE_VERSION = 2;
-    private static final String create = "CREATE TABLE "+TABLE_NAME+" (Id INTEGER PRIMARY KEY AUTOINCREMENT, Usertext varchar(255));";
+    private static final int DATABASE_VERSION = 3;
+    private static final String create = "CREATE TABLE "+TABLE_NAME+" (Id INTEGER PRIMARY KEY AUTOINCREMENT, Usertext varchar(255), Datetime varchar(255));";
 
     private Context context;
 

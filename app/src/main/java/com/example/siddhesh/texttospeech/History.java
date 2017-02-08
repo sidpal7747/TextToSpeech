@@ -7,20 +7,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.tuyenmonkey.textdecorator.TextDecorator;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -29,14 +29,14 @@ import java.util.Locale;
  * Created by SIDDHESH on 16-01-2017.
  */
 
-public class History extends AppCompatActivity implements TextToSpeech.OnInitListener,AdapterView.OnItemLongClickListener {
+public class History extends AppCompatActivity implements AdapterView.OnItemLongClickListener {
     ListView listView;
     ArrayAdapter<String> arrayAdapter;
-    private TextToSpeech tts;
+
     boolean flag = false;
     ArrayList<String> list = new ArrayList();
-    int result = 0;
-    String[] values;
+
+    String[] values,timeStamp;
     SQLiteDatabase sqLiteDatabase;
     DBhelper dBhelper;
     ImageView his,menus,delete;
@@ -52,7 +52,7 @@ public class History extends AppCompatActivity implements TextToSpeech.OnInitLis
         sharedPreferences = getSharedPreferences("MyData",MODE_PRIVATE);
         editor = sharedPreferences.edit();
         dBhelper = new DBhelper(this);
-        tts = new TextToSpeech(this, this);
+
         tool = (Toolbar)findViewById(R.id.tool);
         tool_del = (Toolbar)findViewById(R.id.tool_del);
         his = (ImageView)findViewById(R.id.history_icon);
@@ -124,7 +124,10 @@ public class History extends AppCompatActivity implements TextToSpeech.OnInitLis
                         counter.setText(""+list.size());
                     }
                 } else {
-                    speakOut(str);
+//                    speakOut(str);
+                      Intent intent = new Intent(getApplicationContext(),UserString.class);
+                      intent.putExtra("userValue",str);
+                      startActivity(intent);
 //                    char[] ch = ((String) parent.getItemAtPosition(position)).toCharArray();
 //                    for(int i=0;i<ch.length;i++) {
 //                        try {
@@ -155,14 +158,25 @@ public class History extends AppCompatActivity implements TextToSpeech.OnInitLis
         try {
             int i = 0;
             sqLiteDatabase = dBhelper.getWritableDatabase();
-            String[] columns = {"Usertext"};
+            String[] columns = {"Usertext","Datetime"};
             Cursor cursor = sqLiteDatabase.query("HISTORY", columns, null, null, null, null, null);
             values = new String[cursor.getCount()];
+            timeStamp = new String[cursor.getCount()];
             while (cursor.moveToNext()) {
                 values[i] = cursor.getString(0).toString();
+                timeStamp[i] = cursor.getString(1).toString();
                 i++;
             }
-            arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, android.R.id.text1, values);
+            arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, android.R.id.text1, values){
+                @NonNull
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    View view = super.getView(position,convertView,parent);
+                    TextView tv = (TextView)view.findViewById(android.R.id.text1);
+                    tv.setText(""+values[position]+"\n"+"\n"+timeStamp[position]);
+                    return view;
+                }
+            };
             listView.setAdapter(arrayAdapter);
         } catch (Exception e) {
             Toast.makeText(getApplicationContext(), "" + e.toString(), Toast.LENGTH_LONG).show();
@@ -180,50 +194,7 @@ public class History extends AppCompatActivity implements TextToSpeech.OnInitLis
         finish();
     }
 
-    @Override
-    public void onInit(int status) {
-        if (status == TextToSpeech.SUCCESS) {
-            //if TTS initialized than set language
-            result = tts.setLanguage(Locale.US);
 
-            // tts.setPitch(5); // you can set pitch level
-            // tts.setSpeechRate(2); //you can set speech speed rate
-
-            //check language is supported or not
-            //check language data is available or not
-            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                Toast.makeText(this, "Missing data", Toast.LENGTH_LONG).show();
-                //disable button
-               // btnSpeak.setEnabled(false);
-                listView.setEnabled(false);
-            } else {
-                //if all is good than enable button convert text to speech
-                //btnSpeak.setEnabled(true);
-                listView.setEnabled(true);
-            }
-        } else {
-            Log.e("TTS", "Initilization Failed");
-        }
-    }
-    private void speakOut(String text) {
-        if(result!=tts.setLanguage(Locale.US))
-        {
-            Toast.makeText(getApplicationContext(), "Enter right Words...... ", Toast.LENGTH_LONG).show();
-        }else
-        {
-            //speak given text
-            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
-        }
-    }
-    @Override
-    public void onDestroy() {
-        // Don't forget to shutdown!
-        if (tts != null) {
-            tts.stop();
-            tts.shutdown();
-        }
-        super.onDestroy();
-    }
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
