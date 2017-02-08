@@ -128,18 +128,7 @@ public class History extends AppCompatActivity implements AdapterView.OnItemLong
                       Intent intent = new Intent(getApplicationContext(),UserString.class);
                       intent.putExtra("userValue",str);
                       startActivity(intent);
-//                    char[] ch = ((String) parent.getItemAtPosition(position)).toCharArray();
-//                    for(int i=0;i<ch.length;i++) {
-//                        try {
-//                            Thread.sleep(1000);
-//                            TextDecorator
-//                                    .decorate((TextView) view, (String) parent.getItemAtPosition(position))
-//                                    .setTextColor(R.color.colorPrimary, "" + ch[i])
-//                                    .build();
-//                        } catch (InterruptedException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
+//
                 }
             }
         });

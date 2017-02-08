@@ -2,12 +2,15 @@ package com.example.siddhesh.texttospeech;
 
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.speech.tts.UtteranceProgressListener;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.tuyenmonkey.textdecorator.TextDecorator;
 
 import java.util.Locale;
 
@@ -21,6 +24,7 @@ public class UserString extends AppCompatActivity implements TextToSpeech.OnInit
     String str;
     int result = 0;
     TextToSpeech tts;
+    String words[], temp[];
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,14 +34,31 @@ public class UserString extends AppCompatActivity implements TextToSpeech.OnInit
         textInput = (TextView)findViewById(R.id.textInput);
         linearLayout = (LinearLayout)findViewById(R.id.touchArea);
         str = getIntent().getStringExtra("userValue");
+        words = str.split(" ");
         textInput.setText(""+str);
+        temp = new String[words.length];
         Toast.makeText(this,"Tap to Play",Toast.LENGTH_SHORT).show();
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                speakOut(str);
+//                for(int i=0;i<words.length;i++){
+//                              speakOut(words[i]);
+//                              try {
+//                                  Thread.sleep(500);
+//                                  if(!words[i].equals(null))
+//                                  temp[i] = words[i];
+//                                  TextDecorator
+//                                          .decorate(textInput, str)
+//                                          .setTextColor(R.color.colorPrimary, temp)
+//                                          .build();
+//                              } catch (InterruptedException e) {
+//                                  e.printStackTrace();
+//                              }
+//                      }
+                    speakOut(str);
             }
         });
+
     }
     @Override
     public void onInit(int status) {
